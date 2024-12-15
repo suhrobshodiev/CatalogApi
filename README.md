@@ -195,12 +195,59 @@ dotnet add package MongoDB.Driver
         }
     }
     ```
-
+  ### **7. Configurations in the Program.cs file**
+  ```csharp
+    // Importing namespaces for models and services
+    using CatalogApi.Models;
+    using CatalogApi.Services;
+    
+    // Initialize the builder for the web application
+    var builder = WebApplication.CreateBuilder(args);
+    
+    // Configure database settings from the configuration file
+    builder.Services.Configure<CatalogDbSettings>(
+    builder.Configuration.GetSection("CatalogDbSettings"));
+    
+    // Register the CatalogsService to handle database operations as a singleton
+    builder.Services.AddSingleton<CatalogsService>();
+    
+    // Add support for API controllers
+    builder.Services.AddControllers();
+    
+    // Enable API endpoint exploration (used by Swagger to generate docs)
+    builder.Services.AddEndpointsApiExplorer();
+    
+    // Configure Swagger to generate and display API documentation
+    builder.Services.AddSwaggerGen();
+    
+    // Build the application based on the defined configurations
+    var app = builder.Build();
+    
+    // Check if the environment is set to development
+    if (app.Environment.IsDevelopment())
+    {
+    // Enable Swagger UI for testing the API in development mode
+    app.UseSwagger();
+    app.UseSwaggerUI();
+    }
+    
+    // Redirect all HTTP requests to HTTPS
+    app.UseHttpsRedirection();
+    
+    // Enable authorization for accessing protected API endpoints
+    app.UseAuthorization();
+    
+    // Map API controllers to handle incoming requests
+    app.MapControllers();
+    
+    // Run the application
+    app.Run();
+  ```
 ---
-### Build and run
-```bash
-     dotnet run
-```
-- Go to http://localhost:5074/swagger/index.html
+  ### **Build and run**
+  ```bash
+       dotnet run
+  ```
+  - Go to http://localhost:5074/swagger/index.html
 ---
 ![catalogApi.png](src/catalogApi.png)
