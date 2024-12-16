@@ -2,6 +2,14 @@
 
 This project demonstrates how to build a simple **CRUD (Create, Read, Update, Delete)** API with **MongoDB** using **ASP.NET Core**.
 
+Web API is a key part of building a CRUD API. It is a way to create an ASP.NET application specifically adapted to work in the REST (Representational State Transfer) style. It facilitates communication between the client and the server by transferring data in XML and JSON formats. Services that use the REST architecture are called RESTful services.
+
+The CRUD operations correspond to the following HTTP methods in REST:
+- **GET**: Read data (retrieve from a list).
+- **POST**: Create new data.
+- **PUT**: Update existing data.
+- **DELETE**: Remove specific data.
+
 ---
 
 ## **Prerequisites**
